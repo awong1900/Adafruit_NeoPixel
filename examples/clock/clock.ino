@@ -13,6 +13,9 @@
 // How many NeoPixels are attached to the Arduino?
 #define NUMPIXELS      20
 
+#define RED 0
+#define GREEN 255
+#define BLUE 255
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
 // example for more information on possible values.
@@ -131,46 +134,46 @@ void display(int num) {
 void displayBihua(int index) {
   switch(index) {
     case 1:
-      pixels.setPixelColor(0, pixels.Color(0,20, 20));
-      pixels.setPixelColor(1, pixels.Color(0,20, 20));
-      pixels.setPixelColor(2, pixels.Color(0,20, 20));
-      pixels.setPixelColor(11, pixels.Color(0,20, 20));
+      pixels.setPixelColor(0, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(1, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
       break; 
     case 2:
-      pixels.setPixelColor(2, pixels.Color(0,20, 20));
-      pixels.setPixelColor(3, pixels.Color(0,20, 20));
-      pixels.setPixelColor(4, pixels.Color(0,20, 20));
-      pixels.setPixelColor(5, pixels.Color(0,20, 20));
+      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(3, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(4, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(5, pixels.Color(RED,GREEN, BLUE));
       break;
     case 3:
-      pixels.setPixelColor(5, pixels.Color(0,20, 20));
-      pixels.setPixelColor(6, pixels.Color(0,20, 20));
-      pixels.setPixelColor(7, pixels.Color(0,20, 20));
-      pixels.setPixelColor(8, pixels.Color(0,20, 20));
+      pixels.setPixelColor(5, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(6, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(7, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(8, pixels.Color(RED,GREEN, BLUE));
       break;
     case 4:
-      pixels.setPixelColor(8, pixels.Color(0,20, 20));
-      pixels.setPixelColor(9, pixels.Color(0,20, 20));
-      pixels.setPixelColor(10, pixels.Color(0,20, 20));
-      pixels.setPixelColor(11, pixels.Color(0,20, 20));
+      pixels.setPixelColor(8, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(9, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(10, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
       break;
     case 5:
-      pixels.setPixelColor(11, pixels.Color(0,20, 20));
-      pixels.setPixelColor(12, pixels.Color(0,20, 20));
-      pixels.setPixelColor(13, pixels.Color(0,20, 20));
-      pixels.setPixelColor(14, pixels.Color(0,20, 20));
+      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(12, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(13, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(14, pixels.Color(RED,GREEN, BLUE));
       break;
     case 6:
-      pixels.setPixelColor(14, pixels.Color(0,20, 20));
-      pixels.setPixelColor(15, pixels.Color(0,20, 20));
-      pixels.setPixelColor(16, pixels.Color(0,20, 20));
-      pixels.setPixelColor(17, pixels.Color(0,20, 20));
+      pixels.setPixelColor(14, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(15, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(16, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(17, pixels.Color(RED,GREEN, BLUE));
       break;
     case 7:
-      pixels.setPixelColor(2, pixels.Color(0,20, 20));
-      pixels.setPixelColor(17, pixels.Color(0,20, 20));
-      pixels.setPixelColor(18, pixels.Color(0,20, 20));
-      pixels.setPixelColor(19, pixels.Color(0,20, 20));
+      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(17, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(18, pixels.Color(RED,GREEN, BLUE));
+      pixels.setPixelColor(19, pixels.Color(RED,GREEN, BLUE));
       break;
   }
 }
