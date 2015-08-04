@@ -11,11 +11,11 @@
 #define PIN            6
 
 // How many NeoPixels are attached to the Arduino?
-#define NUMPIXELS      20
+#define NUMPIXELS      40
 
 #define RED 0
-#define GREEN 10
-#define BLUE 10
+#define GREEN 128
+#define BLUE 128
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
 // example for more information on possible values.
@@ -88,32 +88,32 @@ int stroke[4][7][5] = {
     {15, 16, 17, 18}, //5
     {18, 19, 20,  3}  //6
   },
-  {//first number
-    {12,  1,  2,  3}, //0
-    { 3,  4,  5,  6}, //1
-    { 6,  7,  8,  9}, //2
-    { 9, 10, 11, 12}, //3
-    {12, 13, 14, 15}, //4
-    {15, 16, 17, 18}, //5
-    {18, 19, 20,  3}  //6
+  {//second number
+    {22, 21, 22, 23}, //0
+    {23, 24, 25, 26}, //1
+    {26, 27, 28, 29}, //2
+    {29, 30, 31, 32}, //3
+    {32, 33, 34, 35}, //4
+    {35, 36, 37, 38}, //5
+    {38, 39, 40, 23}  //6
   },
-  {//first number
-    {12,  1,  2,  3}, //0
-    { 3,  4,  5,  6}, //1
-    { 6,  7,  8,  9}, //2
-    { 9, 10, 11, 12}, //3
-    {12, 13, 14, 15}, //4
-    {15, 16, 17, 18}, //5
-    {18, 19, 20,  3}  //6
+  {//third numbe2
+    {52, 41, 42, 43}, //0
+    {43, 44, 45, 46}, //1
+    {46, 47, 48, 49}, //2
+    {49, 50, 51, 52}, //3
+    {52, 53, 54, 55}, //4
+    {55, 56, 57, 58}, //5
+    {58, 59, 60, 43}  //6
   },
-  {//first number
-    {12,  1,  2,  3}, //0
-    { 3,  4,  5,  6}, //1
-    { 6,  7,  8,  9}, //2
-    { 9, 10, 11, 12}, //3
-    {12, 13, 14, 15}, //4
-    {15, 16, 17, 18}, //5
-    {18, 19, 20,  3}  //6
+  {//forth number
+    {72, 61, 62, 63}, //0
+    {63, 64, 65, 66}, //1
+    {66, 67, 68, 69}, //2
+    {69, 70, 71, 72}, //3
+    {72, 73, 74, 75}, //4
+    {75, 76, 77, 78}, //5
+    {78, 79, 80, 63}  //6
   }
 };
 #endif
@@ -125,10 +125,10 @@ int number[10][7] = {
   {0, 1, 2, 5, 6}, //   3
   {0, 1, 3, 6}, //   4
   {0, 2, 3, 5, 6}, //   5
-  {0, 3, 4, 5, 6}, //   6
+  {0, 2, 3, 4, 5, 6}, //   6
   {1, 2, 6},  //  7
   {0, 1, 2, 3, 4, 5, 6}, //   8
-  {0, 1, 2, 3, 6} //   9
+  {0, 1, 2, 3, 5, 6} //   9
 };
 
 void setNumber(int index, int num) {
@@ -140,8 +140,7 @@ void setNumber(int index, int num) {
   int mbreak;
   mbreak = false;
 
-  for (int i=0; i < pixels.numPixels(); i++)
-    pixels.setPixelColor(i, 0); 
+
 
   for (int i=0;i<7;i++) {
     if(mbreak)
@@ -205,7 +204,10 @@ void loop() {
   // pixels.show();
   // delay(2000);
   for (int i=0; i<10; i++) {
+    for (int i=0; i < pixels.numPixels(); i++)
+      pixels.setPixelColor(i, 0); 
     setNumber(1, i);
+    setNumber(2, i);
     pixels.show();
     delay(1000);
   }
