@@ -5,6 +5,8 @@
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
+#include <Wire.h>
+#include "DS1307.h"
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1
@@ -20,6 +22,7 @@
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
 // example for more information on possible values.
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+DS1307 clock;//define a object of DS1307 class
 
 int delayval = 500; // delay for half a second
 
@@ -140,8 +143,6 @@ void setNumber(int index, int num) {
   int mbreak;
   mbreak = false;
 
-
-
   for (int i=0;i<7;i++) {
     if(mbreak)
       break;
@@ -164,19 +165,38 @@ void setDot(bool a) {
 }
 
 void setup() {
-
-  // pixels.begin(); // This initializes the NeoPixel library.
-  // pixels.show();
-
   Serial.begin(115200);
-  pixels.begin();
+  Serial.println("Hello!");
 
-  setNumber(1, 1);
-  setNumber(2, 6);
-  setDot(true);
-  setNumber(3, 2);
-  setNumber(4, 0);
-  pixels.show();
+  clock.begin();
+	// clock.fillByYMD(2015,8,9);//Jan 19,2013
+	// clock.fillByHMS(16,44,00);//15:28 30"
+	// clock.fillDayOfWeek(SUN);//Saturday
+	// clock.setTime();//write time to the RTC chip
+
+  clock.fillByYMD(2015,7,27);//Jan 19,2013
+	clock.fillByHMS(10,00,30);//15:28 30"
+	clock.fillDayOfWeek(SAT);//Saturday
+	clock.setTime();//write time to the RTC chip
+
+// delay(1000);
+//   Serial.println(clock.hour, DEC);
+// 	Serial.println(clock.minute, DEC);
+//
+//   int hour = clock.hour;
+//   int minute = clock.minute;
+//
+//   Serial.println((hour/10),DEC);
+//   Serial.println(hour%10,DEC);
+//
+  pixels.begin();
+//
+//   setNumber(1, hour/10);
+//   setNumber(2, hour%10);
+//   setDot(true);
+//   setNumber(3, minute/10);
+//   setNumber(4, minute%10);
+//   pixels.show();
   // display(1);
 
 }
@@ -204,17 +224,33 @@ void loop() {
   //   pixels.setPixelColor(i, 0);
   // setNumber(1, 2);
   // pixels.show();
-
+  //
   // delay(2000);
   // for (int i=0; i < 100; i++)
   //   pixels.setPixelColor(i, 0);
   // setNumber(1, 4);
   // pixels.show();
   // delay(2000);
-  // for (int i=0; i<10; i++) {
-  //   for (int i=0; i < pixels.numPixels(); i++)
-  //     pixels.setPixelColor(i, 0);
 
-    delay(1000);
-  // }
+
+
+  clock.getTime();
+  int hour = clock.hour;
+  int minute = clock.minute;
+
+  Serial.println(hour,DEC);
+  Serial.println(minute,DEC);
+
+  for (int i=0; i < 82; i++){
+    pixels.setPixelColor(i, 0);
+  }
+  setNumber(1, hour/10);
+  setNumber(2, hour%10);
+  setDot(true);
+  setNumber(3, minute/10);
+  setNumber(4, minute%10);
+  pixels.show();
+
+  delay(1000);
+
 }
