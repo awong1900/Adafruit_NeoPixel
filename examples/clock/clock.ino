@@ -11,7 +11,7 @@
 #define PIN            6
 
 // How many NeoPixels are attached to the Arduino?
-#define NUMPIXELS      40
+#define NUMPIXELS      82
 
 #define RED 0
 #define GREEN 128
@@ -31,7 +31,7 @@ int delayval = 500; // delay for half a second
 
 // Number_index, stroke, pixel_index
 #define  PIXEL_INDEX  stroke
-#define NUMBER number 
+#define NUMBER number
 
 #if (EVERY_PIXEL == 5)
 int stroke[4][7][5] = {
@@ -89,7 +89,7 @@ int stroke[4][7][5] = {
     {18, 19, 20,  3}  //6
   },
   {//second number
-    {22, 21, 22, 23}, //0
+    {32, 21, 22, 23}, //0
     {23, 24, 25, 26}, //1
     {26, 27, 28, 29}, //2
     {29, 30, 31, 32}, //3
@@ -98,28 +98,28 @@ int stroke[4][7][5] = {
     {38, 39, 40, 23}  //6
   },
   {//third numbe2
-    {52, 41, 42, 43}, //0
-    {43, 44, 45, 46}, //1
-    {46, 47, 48, 49}, //2
-    {49, 50, 51, 52}, //3
-    {52, 53, 54, 55}, //4
-    {55, 56, 57, 58}, //5
-    {58, 59, 60, 43}  //6
+    {54, 43, 44, 45}, //0
+    {45, 46, 47, 48}, //1
+    {48, 49, 50, 51}, //2
+    {51, 52, 53, 54}, //3
+    {54, 55, 56, 57}, //4
+    {57, 58, 59, 60}, //5
+    {60, 61, 62, 45}  //6
   },
   {//forth number
-    {72, 61, 62, 63}, //0
-    {63, 64, 65, 66}, //1
-    {66, 67, 68, 69}, //2
-    {69, 70, 71, 72}, //3
-    {72, 73, 74, 75}, //4
-    {75, 76, 77, 78}, //5
-    {78, 79, 80, 63}  //6
+    {74, 63, 64, 65}, //0
+    {65, 66, 67, 68}, //1
+    {68, 69, 70, 71}, //2
+    {71, 72, 73, 74}, //3
+    {74, 75, 76, 77}, //4
+    {77, 78, 79, 80}, //5
+    {80, 81, 82, 65}  //6
   }
 };
 #endif
 
 int number[10][7] = {
-  {1, 2, 3, 4, 5, 6}, //0 
+  {1, 2, 3, 4, 5, 6}, //0
   {1, 6}, // 1
   {0, 1, 2, 4, 5}, //   2
   {0, 1, 2, 5, 6}, //   3
@@ -128,7 +128,7 @@ int number[10][7] = {
   {0, 2, 3, 4, 5, 6}, //   6
   {1, 2, 6},  //  7
   {0, 1, 2, 3, 4, 5, 6}, //   8
-  {0, 1, 2, 3, 5, 6} //   9
+  {0, 1, 2, 3, 5, 6} //   9s
 };
 
 void setNumber(int index, int num) {
@@ -145,7 +145,7 @@ void setNumber(int index, int num) {
   for (int i=0;i<7;i++) {
     if(mbreak)
       break;
-    if (NUMBER[num][i] == 6) 
+    if (NUMBER[num][i] == 6)
       mbreak = true;
     Serial.println();
     for(int j=0; j<EVERY_PIXEL; j++) {
@@ -158,17 +158,25 @@ void setNumber(int index, int num) {
   // pixels.setPixelColor(0, pixels.Color(RED,GREEN, BLUE));
 }
 
+void setDot(bool a) {
+  pixels.setPixelColor(40, pixels.Color(RED, GREEN, BLUE));
+  pixels.setPixelColor(41, pixels.Color(RED, GREEN, BLUE));
+}
+
 void setup() {
 
   // pixels.begin(); // This initializes the NeoPixel library.
   // pixels.show();
 
-  Serial.begin(115200); 
+  Serial.begin(115200);
   pixels.begin();
-  setNumber(1, 2);
+
+  setNumber(1, 1);
+  setNumber(2, 6);
+  setDot(true);
+  setNumber(3, 2);
+  setNumber(4, 0);
   pixels.show();
-
-
   // display(1);
 
 }
@@ -193,150 +201,20 @@ void loop() {
   //   delay(1000);
   // }
   // for (int i=0; i < 100; i++)
-  //   pixels.setPixelColor(i, 0); 
+  //   pixels.setPixelColor(i, 0);
   // setNumber(1, 2);
   // pixels.show();
 
   // delay(2000);
   // for (int i=0; i < 100; i++)
-  //   pixels.setPixelColor(i, 0); 
+  //   pixels.setPixelColor(i, 0);
   // setNumber(1, 4);
   // pixels.show();
   // delay(2000);
-  for (int i=0; i<10; i++) {
-    for (int i=0; i < pixels.numPixels(); i++)
-      pixels.setPixelColor(i, 0); 
-    setNumber(1, i);
-    setNumber(2, i);
-    pixels.show();
+  // for (int i=0; i<10; i++) {
+  //   for (int i=0; i < pixels.numPixels(); i++)
+  //     pixels.setPixelColor(i, 0);
+
     delay(1000);
-  }
+  // }
 }
-/*
-void display(int num) {
-  for (int i=0; i < pixels.numPixels(); i++)
-    pixels.setPixelColor(i, 0);   
-  delay(1000);
-  switch (num) {
-    case 0:
-      displayBihua(2);
-      displayBihua(3);
-      displayBihua(4);
-      displayBihua(5);
-      displayBihua(6);
-      displayBihua(7);
-    break;
-    case 1:
-      displayBihua(2);
-      displayBihua(7);
-      break;
-    case 2:
-      displayBihua(3);
-      displayBihua(2);
-      displayBihua(1);
-      displayBihua(5);
-      displayBihua(6);
-      break;
-    case 3:
-      displayBihua(3);
-      displayBihua(2);
-      displayBihua(1);
-      displayBihua(7);
-      displayBihua(6);
-      break;
-    case 4:
-      displayBihua(4);
-      displayBihua(1);
-      displayBihua(2);
-      displayBihua(7);
-      break;
-    case 5:
-      displayBihua(3);
-      displayBihua(4);
-      displayBihua(1);
-      displayBihua(7);
-      displayBihua(6);
-      break;
-    case 6:
-      displayBihua(3);
-      displayBihua(4);
-      displayBihua(5);
-      displayBihua(6);
-      displayBihua(7);
-      displayBihua(1);
-      break;
-    case 7:
-      displayBihua(3);
-      displayBihua(2);
-      displayBihua(7);
-      break;
-    case 8:
-      displayBihua(1);
-      displayBihua(2);
-      displayBihua(3);
-      displayBihua(4);
-      displayBihua(5);
-      displayBihua(6);
-      displayBihua(7);
-      break;
-    case 9:
-      displayBihua(1);
-      displayBihua(2);
-      displayBihua(3);
-      displayBihua(4);
-      displayBihua(7);
-      displayBihua(6);
-      break;
-  }
-
-
-  pixels.show();
-}
-
-void displayBihua(int index) {
-  switch(index) {
-    case 1:
-      pixels.setPixelColor(0, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(1, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
-      break; 
-    case 2:
-      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(3, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(4, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(5, pixels.Color(RED,GREEN, BLUE));
-      break;
-    case 3:
-      pixels.setPixelColor(5, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(6, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(7, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(8, pixels.Color(RED,GREEN, BLUE));
-      break;
-    case 4:
-      pixels.setPixelColor(8, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(9, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(10, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
-      break;
-    case 5:
-      pixels.setPixelColor(11, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(12, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(13, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(14, pixels.Color(RED,GREEN, BLUE));
-      break;
-    case 6:
-      pixels.setPixelColor(14, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(15, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(16, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(17, pixels.Color(RED,GREEN, BLUE));
-      break;
-    case 7:
-      pixels.setPixelColor(2, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(17, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(18, pixels.Color(RED,GREEN, BLUE));
-      pixels.setPixelColor(19, pixels.Color(RED,GREEN, BLUE));
-      break;
-  }
-}
-*/
