@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "DS1307.h"
-#include "clock_output.h"
+#include "Pixel_Clock.h"
 
 #define STATE_NORMAL  0x00
 #define STATE_SETTING 0x01
@@ -24,7 +24,7 @@ int plus_pin = 3;
 int hour = 19;
 int minute = 30;
 
-ClcokOutput clock;
+Pixel_Clock clock;
 DS1307 time;
 
 void setup() {
@@ -33,8 +33,9 @@ void setup() {
   get_time();
 
   clock.begin();
-  clock.set_brightness(20);
-  clock_init();
+  clock.set_brightness(10);
+  clock.start_show();
+  clock_display();
 
   attachInterrupt(digitalPinToInterrupt(setting_pin), button_one, RISING); //button P
   attachInterrupt(digitalPinToInterrupt(plus_pin), button_two, RISING);
@@ -45,7 +46,7 @@ void loop() {
     if (button_one_confirm()) {
       setting_state_change();
       if (state == STATE_NORMAL) {
-        clock_init();
+        clock_display();
         save_time();
       }
     }
@@ -269,7 +270,7 @@ void save_time() {
   time.setTime();  
 }
 
-void clock_init() {
+void clock_display() {
   clock.set_number(1, hour/10);
   clock.set_number(2, hour%10);
   clock.set_clock_dot(true);

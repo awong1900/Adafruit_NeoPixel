@@ -62,20 +62,20 @@ int NUMBER[10][7] = {
   {0, 1, 2, 3, 5, 6} //   9s
 };
 
-ClcokOutput::ClcokOutput() {
+Pixel_Clock::Pixel_Clock() {
 
 }
 
-void ClcokOutput::begin() {
+void Pixel_Clock::begin() {
   led_strip_init();
 }
 
-void ClcokOutput::led_strip_init() {
+void Pixel_Clock::led_strip_init() {
   pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
   pixels.begin();
 }
 
-void ClcokOutput::set_number(uint8_t index, uint8_t num) {
+void Pixel_Clock::set_number(uint8_t index, uint8_t num) {
   set_number_off(index);
   if (index < 1 || index > 4)
     return;
@@ -99,7 +99,7 @@ void ClcokOutput::set_number(uint8_t index, uint8_t num) {
   pixels.show();
 }
 
-void ClcokOutput::set_clock_dot(bool on_off) {
+void Pixel_Clock::set_clock_dot(bool on_off) {
   if(on_off) {
     pixels.setPixelColor(40, pixels.Color(RED, GREEN, BLUE));
     pixels.setPixelColor(41, pixels.Color(RED, GREEN, BLUE));
@@ -110,7 +110,7 @@ void ClcokOutput::set_clock_dot(bool on_off) {
   pixels.show();
 }
 
-void ClcokOutput::set_number_off(uint8_t index) {
+void Pixel_Clock::set_number_off(uint8_t index) {
   int num = 8;
   int mbreak;
   mbreak = false;
@@ -129,11 +129,11 @@ void ClcokOutput::set_number_off(uint8_t index) {
   pixels.show();
 }
 
-void ClcokOutput::set_brightness(uint8_t brightness) {
+void Pixel_Clock::set_brightness(uint8_t brightness) {
   pixels.setBrightness(brightness);
 }
 
-void ClcokOutput::set_color(uint8_t index, uint8_t num, uint32_t color) {
+void Pixel_Clock::set_color(uint8_t index, uint8_t num, uint32_t color) {
   if (index < 1 || index > 4)
     return;
   if (num < 0 || num > 9)
