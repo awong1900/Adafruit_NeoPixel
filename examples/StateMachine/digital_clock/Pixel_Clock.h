@@ -5,6 +5,7 @@
 
 class Pixel_Clock {
 private:
+	uint32_t color;
 
   void led_strip_init();
 
@@ -18,7 +19,7 @@ public:
   void set_number_off(uint8_t index);
 
   void set_brightness(uint8_t brightness);
-  void set_color(uint8_t index, uint8_t num, uint32_t color);
+  void set_color(uint32_t r);
 };
 
 

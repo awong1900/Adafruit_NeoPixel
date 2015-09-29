@@ -5,6 +5,8 @@
 #define RED 0
 #define GREEN 255
 #define BLUE 255
+
+
 #define EVERY_PIXEL 4
 
 int PIXEL_INDEX[4][7][5] = {
@@ -63,7 +65,7 @@ int NUMBER[10][7] = {
 };
 
 Pixel_Clock::Pixel_Clock() {
-
+  color = 0x00FFFF;
 }
 
 void Pixel_Clock::begin() {
@@ -92,7 +94,7 @@ void Pixel_Clock::set_number(uint8_t index, uint8_t num) {
       mbreak = true;
     for(int j=0; j<EVERY_PIXEL; j++) {
       int stroke_number = NUMBER[num][i];
-      pixels.setPixelColor(PIXEL_INDEX[index-1][stroke_number][j]-1, pixels.Color(RED, GREEN, BLUE));
+      pixels.setPixelColor(PIXEL_INDEX[index-1][stroke_number][j]-1, color);
     }
   }
 
@@ -101,8 +103,8 @@ void Pixel_Clock::set_number(uint8_t index, uint8_t num) {
 
 void Pixel_Clock::set_clock_dot(bool on_off) {
   if(on_off) {
-    pixels.setPixelColor(40, pixels.Color(RED, GREEN, BLUE));
-    pixels.setPixelColor(41, pixels.Color(RED, GREEN, BLUE));
+    pixels.setPixelColor(40, color);
+    pixels.setPixelColor(41, color);
   } else {
     pixels.setPixelColor(40, 0);
     pixels.setPixelColor(41, 0);
@@ -133,33 +135,14 @@ void Pixel_Clock::set_brightness(uint8_t brightness) {
   pixels.setBrightness(brightness);
 }
 
-void Pixel_Clock::set_color(uint8_t index, uint8_t num, uint32_t color) {
-  if (index < 1 || index > 4)
-    return;
-  if (num < 0 || num > 9)
-    return;
-
-  int mbreak;
-  mbreak = false;
-
-  for (int i=0;i<7;i++) {
-    if(mbreak)
-      break;
-    if (NUMBER[num][i] == 6)
-      mbreak = true;
-    for(int j=0; j<EVERY_PIXEL; j++) {
-      int stroke_number = NUMBER[num][i];
-      pixels.setPixelColor(PIXEL_INDEX[index-1][stroke_number][j]-1, color);
-    }
-  }
-
-  pixels.show();
-}
-
 void Pixel_Clock::start_show() {
   for(int i=0;i<NUMPIXELS;i++){
-    pixels.setPixelColor(i, pixels.Color(RED,GREEN,BLUE)); 
+    pixels.setPixelColor(i, color); 
     pixels.show(); 
     delay(50); 
   }
+}
+
+void Pixel_Clock::set_color(uint32_t c) {
+  color = c;
 }
