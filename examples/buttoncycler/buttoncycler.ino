@@ -30,6 +30,8 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+
+  startShow(0);
 }
 
 void loop() {
